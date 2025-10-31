@@ -30,22 +30,25 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: opacity 1.5s ease-in-out;
     }
 
     video {
-      opacity: 0;
+      display: none;
     }
 
     video.show {
-      opacity: 1;
+      display: block;
+    }
+
+    img.hide {
+      display: none;
     }
   </style>
 </head>
 <body>
 
   <div class="media-container">
-    <img src="1.png" alt="matimat14 intro">
+    <img src="1.png" alt="intro" id="image">
     <video
       id="video"
       src="video_1.mp4"
@@ -60,10 +63,13 @@
 
   <script>
     const video = document.getElementById("video");
+    const image = document.getElementById("image");
+
     video.oncanplaythrough = () => {
       setTimeout(() => {
+        image.classList.add("hide");
         video.classList.add("show");
-      }, 3000); // 3 sekundy po załadowaniu video, odpala się płynnie
+      }, 3000); // dokładne przełączenie po 3 sek
     };
   </script>
 
