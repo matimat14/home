@@ -3,83 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ziaja – nasza strona</title>
+  <title>matimat14 – strona główna</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
       overflow: hidden;
-      color: white;
-      text-align: center;
     }
 
-    /* Animowane tło */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
+    .media-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
+    }
+
+    .media-container img,
+    .media-container video {
+      position: absolute;
       width: 100%;
       height: 100%;
-      background: linear-gradient(270deg, #0f2027, #203a43, #2c5364);
-      background-size: 600% 600%;
-      animation: gradient 10s ease infinite;
-      z-index: -1;
+      object-fit: cover;
+      border-radius: 12px;
     }
 
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    video {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
     }
 
-    h1 {
-      margin-top: 60px;
-      font-size: 3em;
-    }
-
-    p {
-      font-size: 1.2em;
-      margin-bottom: 30px;
-    }
-
-    form {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 10px;
-      display: inline-block;
-    }
-
-    input, textarea {
-      width: 250px;
-      margin: 10px 0;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: #ffffff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #dddddd;
+    video.show {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
-  <h1>Witaj na stronie Ziaji 🐶</h1>
-  <p>To nasz wspólny projekt!</p>
 
-  <form>
-    <input type="text" placeholder="Twoje imię" required><br>
-    <textarea rows="4" placeholder="Wiadomość"></textarea><br>
-    <button type="submit">Wyślij</button>
-  </form>
-</body>
-</html>
+  <div class="media-container">
+    <img src="1.png" alt="matimat14 intro">
+    <video id="video" src="video_1.mp4" muted autoplay loop playsinline></video>
+  </div>
+
+  <script>
+    const video = document.getElementById("video");
+    setTim
