@@ -1,13 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>matimat14</title>
-
-  <!-- Font styl jak z GAMEOON -->
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matimat14</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -16,130 +14,134 @@
     }
 
     html, body {
-      width: 100%;
       height: 100%;
-      font-family: 'Russo One', sans-serif;
-      background-color: #000;
+      width: 100%;
+      font-family: 'Anton', sans-serif;
+      color: white;
+      overflow: hidden;
     }
 
-    /* OBRAZEK W TLE DO CZASU ZAŁADOWANIA VIDEO */
-    .background-image {
-      position: fixed;
+    body {
+      position: relative;
+      background-color: black;
+    }
+
+    .video-bg {
+      position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('1.png');
-      background-size: cover;
-      background-position: center;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
       z-index: 0;
     }
 
-    video {
-      position: fixed;
-      top: 0;
-      left: 0;
+    .overlay {
+      position: relative;
+      z-index: 1;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      z-index: 1;
-      display: none; /* ukryte do czasu załadowania */
+      padding: 40px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    header {
-      position: absolute;
-      top: 40px;
-      left: 0;
-      width: 100%;
-      z-index: 2;
+    .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 80px;
     }
 
     .logo {
-      font-size: 26px;
-      color: white;
+      font-size: 2.2em;
     }
 
     .logo span {
       color: #b36bff;
     }
 
-    nav {
+    .menu {
       display: flex;
       gap: 40px;
+      font-size: 1em;
     }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.3s;
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100%;
+      padding-left: 20px;
+      padding-bottom: 120px;
     }
 
-    nav a:hover {
-      color: #b36bff;
+    .main-text {
+      font-size: 3.8em;
+      line-height: 1.2;
     }
 
-    /* PRZYCISK JOIN */
-    .join-btn {
-      position: absolute;
-      bottom: 80px;
-      left: 80px;
+    .btn {
+      margin-top: 30px;
       background-color: #b36bff;
-      color: white;
-      font-size: 14px;
-      font-weight: bold;
-      padding: 12px 30px;
-      border-radius: 8px;
       border: none;
+      color: white;
+      padding: 12px 28px;
+      font-size: 1em;
+      border-radius: 4px;
       cursor: pointer;
-      z-index: 2;
-      box-shadow: 0 0 15px #b36bff80;
-      transition: background 0.3s ease, transform 0.2s;
+      font-family: 'Anton', sans-serif;
+      transition: background 0.3s ease;
     }
 
-    .join-btn:hover {
-      background-color: #9a4ddb;
-      transform: scale(1.05);
+    .btn:hover {
+      background-color: #a159f5;
+    }
+
+    @media (max-width: 768px) {
+      .main-text {
+        font-size: 2.2em;
+      }
+
+      .menu {
+        gap: 20px;
+        font-size: 0.9em;
+      }
+
+      .logo {
+        font-size: 1.5em;
+      }
+
+      .btn {
+        padding: 10px 20px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- Obrazek jako pierwsza warstwa -->
-  <div class="background-image" id="bg-image"></div>
-
-  <!-- Video jako druga warstwa -->
-  <video id="bg-video" autoplay muted loop playsinline>
-    <source src="video_2.mp4" type="video/mp4" />
+  <video class="video-bg" autoplay muted loop playsinline poster="1.png">
+    <source src="video_1.mp4" type="video/mp4" />
+    Twoja przeglądarka nie obsługuje wideo.
   </video>
-
-  <!-- MENU -->
-  <header>
-    <div class="logo">MATIMAT<span>14</span></div>
-    <nav>
-      <a href="#">HOME</a>
-      <a href="#">GRY</a>
-      <a href="#">KONTAKT</a>
-    </nav>
-  </header>
-
-  <!-- PRZYCISK -->
-  <button class="join-btn">JOIN US</button>
-
-  <!-- Skrypt: przełączanie z obrazka na video -->
-  <script>
-    const video = document.getElementById('bg-video');
-    const image = document.getElementById('bg-image');
-
-    video.addEventListener('canplaythrough', () => {
-      video.style.display = 'block';     // pokazujemy video
-      image.style.display = 'none';      // chowamy obrazek
-    });
-  </script>
-
+  <div class="overlay">
+    <div class="topbar">
+      <div class="logo">MATIMAT<span>14</span></div>
+      <div class="menu">
+        <div>HOME</div>
+        <div>PAGES</div>
+        <div>ABOUT</div>
+        <div>BLOG</div>
+        <div>CONTACT</div>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="main-text">
+        TOP DANGER<br />
+        LOLIA TEAM
+      </div>
+      <button class="btn">JOIN US</button>
+    </div>
+  </div>
 </body>
 </html>
