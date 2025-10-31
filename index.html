@@ -14,62 +14,60 @@
     html, body {
       height: 100%;
       width: 100%;
-      background-color: #000;
       overflow: hidden;
+      background-color: #000;
     }
 
-    .media-container {
-      position: relative;
+    #background {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-    }
-
-    .media-container img,
-    .media-container video {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      background-image: url('1.png');
+      background-size: cover;
+      background-position: center;
+      z-index: 10;
     }
 
     video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: none;
     }
 
     video.show {
       display: block;
-    }
-
-    img.hide {
-      display: none;
+      z-index: 11;
     }
   </style>
 </head>
 <body>
 
-  <div class="media-container">
-    <img src="1.png" alt="intro" id="image">
-    <video
-      id="video"
-      src="video_1.mp4"
-      muted
-      autoplay
-      loop
-      playsinline
-      preload="auto"
-      poster="1.png">
-    </video>
-  </div>
+  <div id="background"></div>
+
+  <video
+    id="video"
+    src="video_1.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    poster="1.png">
+  </video>
 
   <script>
-    const video = document.getElementById("video");
-    const image = document.getElementById("image");
+    const video = document.getElementById('video');
+    const bg = document.getElementById('background');
 
     video.oncanplaythrough = () => {
-      setTimeout(() => {
-        image.classList.add("hide");
-        video.classList.add("show");
-      }, 3000); // dokładne przełączenie po 3 sek
+      bg.style.display = 'none';     // chowamy tło
+      video.classList.add('show');   // pokazujemy video
     };
   </script>
 
