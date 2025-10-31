@@ -11,20 +11,17 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
+      height: 100%;
+      width: 100%;
       background-color: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       overflow: hidden;
     }
 
     .media-container {
       position: relative;
       width: 100%;
-      max-width: 900px;
-      aspect-ratio: 16 / 9;
+      height: 100%;
     }
 
     .media-container img,
@@ -33,7 +30,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 12px;
     }
 
     video {
@@ -55,4 +51,10 @@
 
   <script>
     const video = document.getElementById("video");
-    setTim
+    setTimeout(() => {
+      video.classList.add("show");
+    }, 3000); // po 3 sekundach przejście z obrazka na video
+  </script>
+
+</body>
+</html>
