@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Matimat14</title>
+  <title>MatiMat14</title>
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
   <style>
     * {
@@ -12,135 +11,100 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     html, body {
       height: 100%;
-      width: 100%;
       font-family: 'Anton', sans-serif;
-      color: white;
       overflow: hidden;
     }
-
     body {
-      position: relative;
       background-color: black;
     }
-
     .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+    .overlay {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: 0;
-    }
-
-    .overlay {
-      position: relative;
-      z-index: 1;
       width: 100%;
       height: 100%;
-      padding: 40px 60px;
+      color: white;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      padding: 40px 60px;
     }
-
-    .topbar {
+    .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-
     .logo {
-      font-size: 2.2em;
+      font-size: 28px;
+      font-weight: bold;
     }
-
     .logo span {
-      color: #b36bff;
+      color: #a678f8;
     }
-
-    .menu {
+    .nav-links {
       display: flex;
       gap: 40px;
-      font-size: 1em;
+      font-size: 14px;
+      text-transform: uppercase;
     }
-
     .main-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      height: 100%;
-      padding-left: 20px;
-      padding-bottom: 120px;
+      margin-top: 60px;
     }
-
     .main-text {
-      font-size: 3.8em;
+      font-size: 60px;
       line-height: 1.2;
+      text-transform: uppercase;
     }
-
-    .btn {
-      margin-top: 30px;
-      background-color: #b36bff;
-      border: none;
+    .cta-button {
+      margin-top: 20px;
+      background: #a678f8;
       color: white;
-      padding: 12px 28px;
-      font-size: 1em;
+      border: none;
+      padding: 12px 30px;
       border-radius: 4px;
+      font-size: 14px;
       cursor: pointer;
-      font-family: 'Anton', sans-serif;
-      transition: background 0.3s ease;
+      transition: background 0.3s;
     }
-
-    .btn:hover {
-      background-color: #a159f5;
-    }
-
-    @media (max-width: 768px) {
-      .main-text {
-        font-size: 2.2em;
-      }
-
-      .menu {
-        gap: 20px;
-        font-size: 0.9em;
-      }
-
-      .logo {
-        font-size: 1.5em;
-      }
-
-      .btn {
-        padding: 10px 20px;
-      }
+    .cta-button:hover {
+      background: #8e5de2;
     }
   </style>
 </head>
 <body>
-  <video class="video-bg" autoplay muted loop playsinline poster="1.png">
-    <source src="video_1.mp4" type="video/mp4" />
-    Twoja przeglądarka nie obsługuje wideo.
+  <video class="video-bg" autoplay muted loop playsinline>
+    <source src="video_2.mp4" type="video/mp4" />
+    Twoja przeglądarka nie wspiera tagu video :(
   </video>
+
   <div class="overlay">
-    <div class="topbar">
-      <div class="logo">MATIMAT<span>14</span></div>
-      <div class="menu">
+    <div class="navbar">
+      <div class="logo">MATI<span>MAT14</span></div>
+      <div class="nav-links">
         <div>HOME</div>
-        <div>PAGES</div>
-        <div>ABOUT</div>
-        <div>BLOG</div>
-        <div>CONTACT</div>
+        <div>GRY</div>
+        <div>O MNIE</div>
+        <div>KONTACT</div>
       </div>
     </div>
+
     <div class="main-content">
       <div class="main-text">
         TOP DANGER<br />
         LOLIA TEAM
       </div>
-      <button class="btn">JOIN US</button>
+      <button class="cta-button">JOIN US</button>
     </div>
   </div>
 </body>
