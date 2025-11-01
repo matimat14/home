@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>matimat14</title>
+  <style>
+    :root{
+      --text:#f3f3f7;
+      --accent1:#8b5cf6;
+      --accent2:#22d3ee;
+      --container-w:min(1200px,92vw);
+      --container-pad:16px;
+    }
+
+    /* Reset */
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{
+      height:100%;width:100%;background:#000;color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+    }
+    body{min-height:100svh;overflow-x:hidden;overflow-y:auto}
+
+    /* Wspólny kontener – ta sama „szyna” dla NAV i HERO */
+    .container{
+      width:var(--container-w);
+      margin:0 auto;
+      padding:0 var(--container-pad);
+    }
+
+    /* TŁO */
+    #background{
+      position:fixed;inset:0;
+      background-image:url('1.png');
+      background-size:cover;background-position:center;
+      z-index:10;
+    }
+
+    /* WIDEO */
+    video{
+      position:fixed;inset:0;width:100%;height:100%;
+      object-fit:cover;display:none;z-index:11;
+    }
+    video.show{display:block}
+
+    /* NAGŁÓWEK */
+    .nav-wrap{
+      position:fixed;left:0;right:0;top:0;z-index:20;
+      padding-top:calc(env(safe-area-inset-top,0px) + 28px); /* odstęp logo od góry */
+      display:grid;place-items:center;pointer-events:none;
+    }
+    .nav{
+      display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;
+      pointer-events:auto;opacity:0;transform:translateY(-6px);
+      transition:opacity .45s ease,transform .45s ease;
+    }
+    .nav.ready{opacity:1;transform:none}
+
+    /* LOGO */
+    .brand{display:flex;align-items:center}
+    .brand .logo{width:56px;height:auto;transform:translateY(2px);margin-top:6px}
+
+    /* MENU */
+    .nav-center{
+      justify-self:center;display:flex;gap:40px;
+      font-weight:700;letter-spacing:.08em;text-shadow:0 1px 2px rgba(0,0,0,.35)
+    }
+    .nav-center a{
+      color:var(--text);text-decoration:none;font-size:16px;opacity:.95;
+      text-shadow:0 0 6px rgba(0,0,0,.6);transition:opacity .2s,transform .2s,color .2s;
+    }
+    .nav-center a:hover{opacity:1;transform:translateY(-1px);color:var(--accent2)}
+
+    /* HAMBURGER */
+    .burger{display:none;background:transparent;border:0;color:#fff;font-size:28px;line-height:1;cursor:pointer}
+
+    /* HERO */
+    .hero{position:relative;z-index:15;min-height:100svh;display:flex;align-items:center;width:100%}
+    .hero.ready{opacity:1}
+
+    /* Treść hero stoi w tej samej „szynie” co logo */
+    .hero .container{display:flex}
+    .hero-inner {
+	max-width: min(700px, 90vw);
+	padding: clamp(16px, 4vw, 40px) 0;
+	padding-left: 1vw; /* subtelne odsunięcie całego tekstu i przycisku od lewej */
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	align-items: flex-start;
+	align-items: flex-start;
+	}
+
+    .hero h1{
+      font-size:clamp(36px,10vw,88px);
+      line-height:1.05;font-weight:900;text-transform:uppercase;
+      letter-spacing:.05em;text-shadow:0 4px 18px rgba(0,0,0,.6);
+    }
+	
+    .hero p.sub {
+	font-size: clamp(11px, 2.2vw, 15px); /* mniejszy, skalowalny napis */
+	color: var(--accent2);
+	letter-spacing: .05em;
+	font-weight: 600;
+	margin-bottom: -2px;
+	text-transform: uppercase;
+	text-shadow: 0 0 8px rgba(34,211,238,.7);
+	}
+
+    .hero .btn{
+      height:48px;padding:0 26px;border-radius:12px;border:0;cursor:pointer;
+      font-weight:800;letter-spacing:.05em;text-transform:uppercase;font-size:14px;color:#0b0b10;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      box-shadow:0 6px 22px rgba(139,92,246,.28);transition:transform .15s,filter .15s;
+    }
+    .hero .btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+    .hero .btn:active{transform:none;filter:brightness(.95)}
+
+    /* RESPONSYWNOŚĆ */
+    @media (max-width:980px){
+      .nav-center{gap:28px}
+    }
+    @media (max-width:760px){
+      .burger{display:block}
+      .nav-center{
+        position:absolute;top:calc(56px + env(safe-area-inset-top,0px));right:16px;
+        display:none;flex-direction:column;gap:12px;background:rgba(0,0,0,.55);
+        backdrop-filter:blur(6px);padding:12px 14px;border-radius:12px;
+      }
+      .nav-center.is-open{display:flex}
+      .brand .logo{width:48px}
+      .hero p.sub{margin-bottom:2px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TŁO -->
+  <div id="background"></div>
+
+  <!-- WIDEO -->
+  <video
+    id="video"
+    src="video_2.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    poster="2.png">
+  </video>
+
+  <!-- MENU -->
+  <div class="nav-wrap">
+    <nav class="nav container" id="nav">
+      <div class="brand">
+        <img src="logo-pies.png" alt="Logo MATIMAT14" class="logo">
+      </div>
+
+      <div class="nav-center" id="mainMenu" aria-label="Główne menu">
+        <a href="index.html">HOME</a>
+        <a href="gry.html">GRY</a>
+        <a href="o_mnie.html">O&nbsp;MNIE</a>
+        <a href="kontakt.html">KONTAKT</a>
+      </div>
+
+      <!-- Hamburger -->
+      <button class="burger" id="burger" aria-controls="mainMenu" aria-expanded="false" aria-label="Menu">☰</button>
+    </nav>
+  </div>
+
+  <!-- HERO – treść stoi w tej samej kolumnie co logo -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <h1>MOJE<br>GRY</h1>
+        <p class="sub">poznaj tytuły w które najczęściej gram</p>
+        <button class="btn" onclick="window.location.href='index.html'">POWRÓT</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const video = document.getElementById('video');
+    const bg = document.getElementById('background');
+    const nav = document.getElementById('nav');
+    const hero = document.getElementById('hero');
+
+    video.oncanplaythrough = () => {
+      bg.style.display = 'none';
+      video.classList.add('show');
+      nav.classList.add('ready');
+      hero.classList.add('ready');
+    };
+
+    // Awaryjnie, gdyby wideo się nie uruchomiło
+    setTimeout(() => {
+      nav.classList.add('ready');
+      hero.classList.add('ready');
+    }, 1500);
+
+    // Hamburger
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('mainMenu');
+    burger?.addEventListener('click', () => {
+      const open = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!open));
+      menu.classList.toggle('is-open', !open);
+    });
+  </script>
+
+</body>
+</html>
